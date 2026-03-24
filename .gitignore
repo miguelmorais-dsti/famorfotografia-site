@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+videos/*.MP4
+videos/*.mp4
+data/*.ndjson
+.env

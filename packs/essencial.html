@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pacote Essencial | Famorfotografia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css?v=6.0" />
+  </head>
+  <body class="internal-page">
+    <div class="noise"></div>
+
+    <nav class="nav">
+      <a class="brand" href="../index.html">Famorfotografia - The Storyteller</a>
+      <div class="nav-links">
+        <a href="../sobre.html" data-pt="Sobre" data-en="About">Sobre</a>
+        <a href="../galeria.html" data-pt="Galeria" data-en="Gallery">Galeria</a>
+        <a href="../videos.html" data-pt="Vídeos" data-en="Videos">Vídeos</a>
+        <a href="../pacotes.html" data-pt="Pacotes" data-en="Packs">Pacotes</a>
+        <a href="../testemunhos.html" data-pt="Testemunhos" data-en="Testimonials">Testemunhos</a>
+        <a href="../contactos.html" data-pt="Contactos" data-en="Contact">Contactos</a>
+        <div class="lang-selector">
+          <button onclick="setLanguage('pt')" id="btn-pt" class="active">PT</button>
+          <span>|</span>
+          <button onclick="setLanguage('en')" id="btn-en">EN</button>
+        </div>
+        <a class="nav-cta" href="../reserva.html" data-pt="Reservar" data-en="Book Now">Reservar</a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <main class="pack-page container">
+
+      <div style="margin-top: 120px; margin-bottom: 2rem; position: relative; z-index: 10;">
+        <a href="../pacotes.html" style="text-decoration: none; color: var(--text-dark); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600;">
+          <span style="font-size: 1.5rem; line-height: 1;">←</span> Voltar aos Pacotes
+        </a>
+      </div>
+
+      <section class="pack-hero fade-in">
+        <p class="eyebrow" data-pt="Casamento" data-en="Wedding">Casamento</p>
+        <h1 data-pt="Essencial" data-en="Essential">Essencial</h1>
+        <p class="lead" data-pt="A base sólida para guardar o vosso dia com elegância." data-en="A solid foundation to capture your day with elegance.">
+          A base sólida para guardar o vosso dia com elegância.
+        </p>
+      </section>
+
+      <div class="pack-detail-grid">
+        <div class="pack-detail-card fade-in">
+          <h2 data-pt="O que inclui" data-en="What's included">O que inclui</h2>
+          <ul>
+            <li data-pt="Preparação dos noivos e cobertura completa da cerimónia e festa" data-en="Bride & groom preparation and full ceremony & party coverage">Preparação dos noivos e cobertura completa da cerimónia e festa</li>
+            <li data-pt="Álbum digital 25x30 (31 folhas)" data-en="Digital album 25x30 (31 pages)">Álbum digital 25x30 (31 folhas)</li>
+            <li data-pt="Same Day Edit (3 a 7 min)" data-en="Same Day Edit (3 to 7 min)">Same Day Edit (3 a 7 min)</li>
+            <li data-pt="Drone (se houver condições)" data-en="Drone (weather permitting)">Drone (se houver condições)</li>
+            <li data-pt="Fotos dos convidados (Até 40)" data-en="Guest photos (Up to 40)">Fotos dos convidados (Até 40)</li>
+            <li data-pt="Sessão Trash the Dress ou Sessão Solteiros" data-en="Trash the Dress or Engagement session">Sessão Trash the Dress ou Sessão Solteiros</li>
+            <li data-pt="Livro de Honra" data-en="Guest Book">Livro de Honra</li>
+            <li data-pt="Pen com todas as fotos" data-en="USB Drive with all photos">Pen com todas as fotos</li>
+          </ul>
+        </div>
+
+        <aside class="pack-aside-info fade-in">
+          <h2 data-pt="Detalhes" data-en="Details">Detalhes</h2>
+          <p data-pt="Um pacote focado na narrativa essencial, garantindo que nenhum momento chave é esquecido, complementado com a perspetiva aérea do drone." data-en="A package focused on the essential narrative, ensuring no key moment is forgotten, complemented by the aerial perspective of the drone.">
+            Um pacote focado na narrativa essencial, garantindo que nenhum momento chave é esquecido, complementado com a perspetiva aérea do drone.
+          </p>
+          <div class="pack-cta">
+            <a class="btn btn-primary" href="../reserva.html?pack=Essencial" data-pt="Pedir Proposta" data-en="Request Proposal">Pedir Proposta</a>
+            <button class="btn btn-ghost" onclick="openCompareModal(event)" data-pt="Comparar todos" data-en="Compare all">Comparar todos</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a class="brand" href="../index.html">Famorfotografia - The Storyteller</a>
+        <nav class="footer-links">
+          <a href="../index.html#sobre" data-pt="Sobre" data-en="About">Sobre</a>
+          <a href="../index.html#galeria" data-pt="Galeria" data-en="Gallery">Galeria</a>
+          <a href="../reserva.html" data-pt="Reservar" data-en="Book Now">Reservar</a>
+        </nav>
+        <p class="footer-copy">© 2026 Famorfotografia</p>
+      </div>
+    </footer>
+
+    <div id="compare-modal" class="modal" aria-hidden="true">
+      <div class="modal-content compare-container">
+        <button id="compare-close" class="modal-close">&times;</button>
+        <h2 data-pt="Comparar Pacotes" data-en="Compare Packages">Comparar Pacotes</h2>
+        
+        <div class="compare-table-wrapper">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th data-pt="Serviços" data-en="Services">Serviços</th>
+                <th data-pt="Essencial" data-en="Essential">Essencial</th>
+                <th data-pt="Clássico" data-en="Classic">Clássico</th>
+                <th data-pt="Completo" data-en="Complete">Completo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-pt="Preparação e Cobertura" data-en="Prep & Coverage">Preparação e Cobertura</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td data-pt="Álbum Digital" data-en="Digital Album">Álbum Digital</td>
+                <td data-pt="25x30 (31 Folhas)" data-en="25x30 (31 Pages)">25x30 (31 Folhas)</td>
+                <td data-pt="25x30 (31 Fls, Capa Acrílico)" data-en="25x30 (31 Pgs, Acrylic Cover)">25x30 (31 Fls, Capa Acrílico)</td>
+                <td data-pt="30x40 (31 Fls, Capa Acrílico)" data-en="30x40 (31 Pgs, Acrylic Cover)">30x40 (31 Fls, Capa Acrílico)</td>
+              </tr>
+              <tr>
+                <td data-pt="Caixa de Transporte" data-en="Transport Box">Caixa de Transporte</td>
+                <td>—</td>
+                <td data-pt="Madeira e Acrílico" data-en="Wood and Acrylic">Madeira e Acrílico</td>
+                <td data-pt="Madeira e Acrílico" data-en="Wood and Acrylic">Madeira e Acrílico</td>
+              </tr>
+              <tr>
+                <td data-pt="Mini Álbuns" data-en="Mini Albums">Mini Álbuns</td>
+                <td>—</td>
+                <td>—</td>
+                <td data-pt="2 Unidades" data-en="2 Units">2 Unidades</td>
+              </tr>
+              <tr>
+                <td data-pt="Same Day Edit" data-en="Same Day Edit">Same Day Edit</td>
+                <td data-pt="3 a 7 min" data-en="3 to 7 min">3 a 7 min</td>
+                <td data-pt="3 a 7 min" data-en="3 to 7 min">3 a 7 min</td>
+                <td data-pt="3 a 7 min" data-en="3 to 7 min">3 a 7 min</td>
+              </tr>
+              <tr>
+                <td data-pt="Vídeo Geral" data-en="Full Video">Vídeo Geral</td>
+                <td>—</td>
+                <td data-pt="30 min" data-en="30 min">30 min</td>
+                <td data-pt="30 min" data-en="30 min">30 min</td>
+              </tr>
+              <tr>
+                <td data-pt="Drone" data-en="Drone">Drone</td>
+                <td data-pt="Se houver condições" data-en="Weather permitting">Se houver condições</td>
+                <td data-pt="Se houver condições" data-en="Weather permitting">Se houver condições</td>
+                <td data-pt="Se houver condições" data-en="Weather permitting">Se houver condições</td>
+              </tr>
+              <tr>
+                <td data-pt="Fotos Convidados" data-en="Guest Photos">Fotos Convidados</td>
+                <td data-pt="Até 40" data-en="Up to 40">Até 40</td>
+                <td data-pt="Até 60" data-en="Up to 60">Até 60</td>
+                <td data-pt="Até 80" data-en="Up to 80">Até 80</td>
+              </tr>
+              <tr>
+                <td data-pt="Sessão Trash the Dress" data-en="Trash the Dress Session">Sessão Trash the Dress</td>
+                <td data-pt="Ou Solteiros" data-en="Or Engagement">Ou Solteiros</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td data-pt="Sessão Solteiros" data-en="Engagement Session">Sessão Solteiros</td>
+                <td data-pt="Ou Trash" data-en="Or Trash">Ou Trash</td>
+                <td>✓</td>
+                <td data-pt="Com Videoclip e Drone" data-en="With Videoclip & Drone">Com Videoclip e Drone</td>
+              </tr>
+              <tr>
+                <td data-pt="Artigos Personalizados" data-en="Custom Items">Artigos Personalizados</td>
+                <td>—</td>
+                <td>—</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td data-pt="Pen com Fotos" data-en="USB with Photos">Pen com Fotos</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td data-pt="Caixa Madeira Pers." data-en="Custom Wood Box">Caixa Madeira Pers.</td>
+              </tr>
+              <tr>
+                <td data-pt="Vídeos Igreja (Originais)" data-en="Church Videos (Original)">Vídeos Igreja (Originais)</td>
+                <td>—</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td data-pt="Livro de Honra" data-en="Guest Book">Livro de Honra</td>
+                <td>✓</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td data-pt="Vídeo 360" data-en="360 Video">Vídeo 360</td>
+                <td>—</td>
+                <td data-pt="2 Horas" data-en="2 Hours">2 Horas</td>
+                <td data-pt="Sem Limite" data-en="Unlimited">Sem Limite</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a class="brand" href="../index.html">Famorfotografia - The Storyteller</a>
+        <nav class="footer-links">
+          <a href="../sobre.html" data-pt="Sobre" data-en="About">Sobre</a>
+          <a href="../galeria.html" data-pt="Galeria" data-en="Gallery">Galeria</a>
+          <a href="../videos.html" data-pt="Vídeos" data-en="Videos">Vídeos</a>
+          <a href="../pacotes.html" data-pt="Pacotes" data-en="Packs">Pacotes</a>
+          <a href="../testemunhos.html" data-pt="Testemunhos" data-en="Testimonials">Testemunhos</a>
+          <a href="../reserva.html" data-pt="Reservar" data-en="Book Now">Reservar</a>
+        </nav>
+        <p class="footer-copy">© 2026 Famorfotografia</p>
+      </div>
+    </footer>
+
+    <script src="../gallery-data.js"></script>
+    <script src="../main.js"></script>
+  <a href="https://wa.me/351917656568?text=Olá! Gostaria de saber mais informações sobre os vossos serviços de fotografia." class="whatsapp-float" target="_blank" rel="noreferrer" aria-label="Contacto via WhatsApp"><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.5 2.5-11.2 2.5-2.5 5.5-6.4 8.3-9.6 2.8-3.2 3.7-5.5 5.6-9.3 1.9-3.7.9-6.9-.5-9.6-1.4-2.8-12.4-29.8-17-41.1-4.5-10.8-9.1-9.3-12.4-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.7 23.7 9.1 31.7 11.7 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a></body>
+</html>

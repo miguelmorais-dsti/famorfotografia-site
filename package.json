@@ -1,0 +1,14 @@
+{
+  "name": "famorfotografia-site",
+  "version": "1.0.0",
+  "description": "Site Famorfotografia com formulários via Resend e Vercel",
+  "main": "api/inquiry.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "18.x"
+  }
+}
