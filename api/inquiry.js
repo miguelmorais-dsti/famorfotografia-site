@@ -1,21 +1,26 @@
 
 export default async function handler(req, res) {
+  // Garantir que é um POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { name, email, partnerName, phone, serviceType, eventDate, location, packageType, budget, message, source } = req.body;
+  // Na Vercel, o req.body já vem parseado se for JSON ou Form URL Encoded
+  const data = req.body;
+  const { name, email, partnerName, phone, serviceType, eventDate, location, packageType, budget, message, source } = data;
 
-  // Validação básica
+  console.log(`[API] Novo pedido recebido de: ${name} (${email})`);
+
+  // Validação mínima
   if (!name || !email || !eventDate) {
-    return res.status(400).json({ error: 'Campos obrigatórios em falta.' });
+    return res.status(400).json({ error: 'Campos obrigatórios em falta (nome, email ou data).' });
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   
   if (!RESEND_API_KEY) {
-    console.warn('Falta RESEND_API_KEY. Simulação de envio.');
-    return res.status(201).json({ ok: true, message: 'Simulated (missing API key)' });
+    console.error('[API] Erro: RESEND_API_KEY não configurada nas variáveis de ambiente da Vercel.');
+    return res.status(500).json({ error: 'Configuração do servidor incompleta.' });
   }
 
   try {
@@ -27,7 +32,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Famorfotografia <onboarding@resend.dev>',
-        to: ['famorfotografia@gmail.com'], // O teu email de destino
+        to: ['famorfotografia@gmail.com'], 
         subject: `Novo Pedido: ${name} - ${serviceType}`,
         html: `
           <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
@@ -56,16 +61,17 @@ export default async function handler(req, res) {
       }),
     });
 
-    const data = await response.json();
+    const result = await response.json();
 
     if (response.ok) {
-      return res.status(201).json({ ok: true, id: data.id });
+      console.log('[API] Email enviado com sucesso:', result.id);
+      return res.status(201).json({ ok: true, id: result.id });
     } else {
-      console.error('Erro na API Resend:', data);
-      return res.status(500).json({ error: 'Erro ao enviar email.' });
+      console.error('[API] Erro na API do Resend:', result);
+      return res.status(response.status).json({ error: 'Erro ao enviar email via Resend.', details: result });
     }
   } catch (err) {
-    console.error('Erro fatal no envio:', err);
-    return res.status(500).json({ error: 'Erro interno no servidor.' });
+    console.error('[API] Erro fatal no servidor:', err);
+    return res.status(500).json({ error: 'Erro interno no servidor ao processar o formulário.' });
   }
 }
