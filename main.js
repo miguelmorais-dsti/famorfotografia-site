@@ -388,10 +388,9 @@ const setupMobileMenu = () => {
   
   if (toggle && navLinks) {
     toggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
       toggle.classList.toggle("open");
-      navLinks.classList.toggle("open");
-      
-      document.body.style.overflow = navLinks.classList.contains("open") ? "hidden" : "";
+      document.body.classList.toggle("menu-open", isOpen);
     });
 
     // Fechar menu ao clicar num link
@@ -399,7 +398,7 @@ const setupMobileMenu = () => {
       link.addEventListener("click", () => {
         toggle.classList.remove("open");
         navLinks.classList.remove("open");
-        document.body.style.overflow = "";
+        document.body.classList.remove("menu-open");
       });
     });
   }
