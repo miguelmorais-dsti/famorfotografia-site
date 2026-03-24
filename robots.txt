@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://famorfotografia.pt/sitemap.xml
+Sitemap: https://famorfotografia.com/sitemap.xml
