@@ -557,16 +557,24 @@ body.menu-open {
     position: fixed !important; 
     top: 0 !important; 
     left: 0 !important; 
-    width: 100% !important; 
+    right: 0 !important;
+    width: auto !important;
     z-index: 1000000 !important;
     background: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
 
-  /* Devolver a transparência original na Home */
+  /* Na Home Page (Mobile), começa transparente mas FIXED */
   .home-page .nav:not(.scrolled) {
     background: transparent !important;
     box-shadow: none !important;
-    position: absolute !important;
+  }
+
+  /* Quando o menu está aberto, o fundo do nav tem de ser branco para não ver a foto atrás do logo */
+  body.menu-open .nav {
+    background: #fff !important;
   }
 
   .home-page .nav:not(.scrolled) .brand,
@@ -574,11 +582,18 @@ body.menu-open {
     color: #fff !important;
   }
 
+  /* Se o menu abrir, o texto do topo (brand/hambúrguer) passa a preto */
+  body.menu-open .brand,
+  body.menu-open .menu-toggle {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+
   .nav-links {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
+    right: 0 !important;
     height: 100vh !important;
     background: #ffffff !important;
     flex-direction: column !important;
@@ -595,17 +610,20 @@ body.menu-open {
     transform: translateY(0) !important;
   }
 
-  /* Garantir que o hambúrguer fica visível e a preto quando o menu abre */
-  .menu-toggle.open {
-    color: #000 !important;
+  .menu-toggle {
+    display: block !important;
     position: relative !important;
     z-index: 1000001 !important;
+    background: transparent !important;
   }
 
   .nav-links a {
     color: #000 !important;
     font-size: 1.6rem !important;
     margin: 1.2rem 0 !important;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    text-transform: lowercase;
   }
 
   .internal-page main { padding-top: 80px !important; }
