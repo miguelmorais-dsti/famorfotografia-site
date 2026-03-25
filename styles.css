@@ -54,7 +54,7 @@ body {
   background: transparent !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
-  position: absolute !important;
+  position: fixed !important;
   padding: 1.5rem 2rem;
   width: 100% !important;
   left: 0 !important;
