@@ -371,15 +371,9 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeCompareModal();
 });
 
-// Scroll handler for Nav
+// Scroll handler for Nav (Removido para manter menu sempre branco)
 const nav = document.querySelector(".nav");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
-});
+// window.addEventListener("scroll", () => { ... });
 
 // Mobile Menu Toggle
 const setupMobileMenu = () => {
