@@ -168,9 +168,9 @@ const sendConfirmationEmail = async (record) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Famorfotografia <geral@famorfotografia.com>',
+        from: 'geral@famorfotografia.com',
         to: [record.email],
-        reply_to: 'famorfotografia@gmail.com',
+        bcc: ['famorfotografia@gmail.com'], // Recebes uma cópia para confirmar que foi enviado
         subject: 'Recebemos a sua mensagem – Famorfotografia - The Storyteller',
         html: `
           <div style="font-family: 'Georgia', serif; line-height: 1.8; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
