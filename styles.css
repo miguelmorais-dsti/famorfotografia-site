@@ -572,6 +572,13 @@ main { padding-top: 100px; }
 }
 .lightbox-close:hover { transform: scale(1.1); }
 
+/* Esconder elementos de navegação de imagem quando um vídeo está aberto */
+.lightbox.video-mode .lightbox-nav,
+.lightbox.video-mode .lightbox-counter,
+.lightbox.video-mode .lightbox-content {
+  display: none !important;
+}
+
 /* ── MODAL (COMPARE) ─────────────────────── */
 
 .modal {

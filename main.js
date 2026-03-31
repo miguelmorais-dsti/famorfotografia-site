@@ -281,6 +281,7 @@ const prevPhoto = (e) => {
 const closeLightbox = () => {
   if (!lightbox) return;
   lightbox.classList.remove("open");
+  lightbox.classList.remove("video-mode");
   if (lightboxImage) lightboxImage.src = "";
   // Remover vídeo se existir
   const video = lightbox.querySelector("video");
@@ -308,6 +309,9 @@ const setupVideoPlayers = () => {
       if (lightboxImage) lightboxImage.src = "";
       const oldVideo = lightbox.querySelector("video");
       if (oldVideo) oldVideo.remove();
+
+      // Ativar modo vídeo
+      lightbox.classList.add("video-mode");
 
       // Criar elemento de vídeo
       const video = document.createElement("video");
