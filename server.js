@@ -168,23 +168,17 @@ const sendConfirmationEmail = async (record) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'geral@famorfotografia.com',
-        to: [record.email],
-        bcc: ['famorfotografia@gmail.com'], // Recebes uma cópia para confirmar que foi enviado
+        from: 'Famorfotografia <geral@famorfotografia.com>',
+        to: [record.email, 'famorfotografia@gmail.com'], // Enviamos para ambos para garantir que vês o resultado
         subject: 'Recebemos a sua mensagem – Famorfotografia - The Storyteller',
         html: `
-          <div style="font-family: 'Georgia', serif; line-height: 1.8; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
-            <h2 style="font-weight: normal; color: #8e735b; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;">Recebemos a sua mensagem</h2>
-            <p>Olá, <strong>${record.name}</strong>,</p>
+          <div style="font-family: sans-serif; line-height: 1.6; color: #1a1a1a;">
+            <h2>Olá ${record.name},</h2>
             <p>Agradecemos o seu contacto através do nosso site.</p>
-            <p>A sua mensagem já está do nosso lado e será processada com a maior brevidade. Iremos analisar as informações enviadas e entraremos em contacto direto para darmos seguimento ao seu pedido.</p>
-            <p>Se entretanto surgir alguma dúvida urgente, não hesite em contactar através do <strong>917656568</strong>.</p>
+            <p>A sua mensagem já está do nosso lado e será processada com a maior brevidade.</p>
+            <p>Se entretanto surgir alguma dúvida urgente, contacte o <strong>917656568</strong>.</p>
             <br>
-            <p style="margin-bottom: 0;">Com os melhores cumprimentos,</p>
-            <p style="margin-top: 5px;">
-              <strong>Miguel Morais</strong><br>
-              <span style="color: #8e735b;">Famorfotografia - The Storyteller</span>
-            </p>
+            <p>Com os melhores cumprimentos,<br><strong>Miguel Morais</strong><br>Famorfotografia</p>
           </div>
         `
       }),
@@ -228,17 +222,19 @@ const handleInquiry = async (req, res) => {
     const record = createRecord(payload, req);
     fs.appendFileSync(INQUIRIES_FILE, `${JSON.stringify(record)}\n`);
     
-    // Aguardar o envio de ambos os emails antes de responder ao utilizador
-    // Essencial para ambientes serverless como a Vercel
+    // Processamento sequencial para garantir que nada é interrompido
     try {
-      await Promise.all([
-        sendNotificationEmail(record),
-        sendConfirmationEmail(record)
-      ]);
-      console.log(`[SERVER] Pedido processado e emails enviados para ${record.id}`);
+      console.log(`[SERVER] Iniciando envio para: ${record.email}`);
+      
+      // 1. Tentar enviar primeiro a confirmação ao cliente
+      await sendConfirmationEmail(record);
+      
+      // 2. Depois enviar a notificação para ti
+      await sendNotificationEmail(record);
+      
+      console.log(`[SERVER] Fluxo de emails concluído para ${record.id}`);
     } catch (emailErr) {
-      console.error("[SERVER] Erro no processamento de emails:", emailErr);
-      // Continuamos para dar sucesso ao utilizador pois o registo foi gravado no ficheiro
+      console.error("[SERVER] Erro crítico no fluxo de emails:", emailErr.message);
     }
 
     json(res, 201, { ok: true, id: record.id });
