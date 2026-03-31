@@ -145,10 +145,56 @@ const sendNotificationEmail = async (record) => {
     if (response.ok) {
       console.log(`[EMAIL] Notificação enviada com sucesso: ${data.id}`);
     } else {
-      console.error('[EMAIL] Erro na API Resend:', data);
+      console.error('[EMAIL] Erro na API Resend (Notificação):', data);
     }
   } catch (err) {
-    console.error('[EMAIL] Erro fatal no envio:', err);
+    console.error('[EMAIL] Erro fatal no envio da notificação:', err);
+  }
+};
+
+const sendConfirmationEmail = async (record) => {
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  
+  if (!RESEND_API_KEY) return;
+
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'Famorfotografia <onboarding@resend.dev>',
+        to: [record.email],
+        reply_to: 'famorfotografia@gmail.com',
+        subject: 'Recebemos a sua mensagem – Famorfotografia - The Storyteller',
+        html: `
+          <div style="font-family: 'Georgia', serif; line-height: 1.8; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
+            <h2 style="font-weight: normal; color: #8e735b; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;">Recebemos a sua mensagem</h2>
+            <p>Olá, <strong>${record.name}</strong>,</p>
+            <p>Agradecemos o seu contacto através do nosso site.</p>
+            <p>A sua mensagem já está do nosso lado e será processada com a maior brevidade. Iremos analisar as informações enviadas e entraremos em contacto direto para darmos seguimento ao seu pedido.</p>
+            <p>Se entretanto surgir alguma dúvida urgente, não hesite em contactar através do <strong>917656568</strong>.</p>
+            <br>
+            <p style="margin-bottom: 0;">Com os melhores cumprimentos,</p>
+            <p style="margin-top: 5px;">
+              <strong>Miguel Morais</strong><br>
+              <span style="color: #8e735b;">Famorfotografia - The Storyteller</span>
+            </p>
+          </div>
+        `
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log(`[EMAIL] Confirmação enviada para ${record.email}: ${data.id}`);
+    } else {
+      console.error('[EMAIL] Erro na API Resend (Confirmação):', data);
+    }
+  } catch (err) {
+    console.error('[EMAIL] Erro fatal no envio da confirmação:', err);
   }
 };
 
@@ -179,8 +225,11 @@ const handleInquiry = async (req, res) => {
     const record = createRecord(payload, req);
     fs.appendFileSync(INQUIRIES_FILE, `${JSON.stringify(record)}\n`);
     
-    // Enviar notificação
-    sendNotificationEmail(record).catch(err => console.error("Email error:", err));
+    // Enviar emails (Notificação e Confirmação)
+    Promise.all([
+      sendNotificationEmail(record),
+      sendConfirmationEmail(record)
+    ]).catch(err => console.error("Email processing error:", err));
 
     json(res, 201, { ok: true, id: record.id });
   } catch (error) {
