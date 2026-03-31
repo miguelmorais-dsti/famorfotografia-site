@@ -433,10 +433,24 @@ const setupInquiryForms = () => {
           body: JSON.stringify(payload),
         });
         if (response.ok) {
-          if (statusNode) statusNode.textContent = "Enviado com sucesso.";
+          if (statusNode) {
+            statusNode.style.color = "green";
+            statusNode.textContent = "Enviado com sucesso.";
+          }
           form.reset();
+        } else {
+          const errData = await response.json();
+          if (statusNode) {
+            statusNode.style.color = "red";
+            statusNode.textContent = `Erro ao enviar: ${errData.error || response.status}`;
+          }
         }
-      } catch (e) {} finally {
+      } catch (e) {
+        if (statusNode) {
+          statusNode.style.color = "red";
+          statusNode.textContent = "Erro de ligação com o servidor.";
+        }
+      } finally {
         fields.forEach((f) => { f.disabled = false; });
       }
     });
