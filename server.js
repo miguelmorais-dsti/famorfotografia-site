@@ -143,19 +143,22 @@ const sendNotificationEmail = async (record) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(`[EMAIL] Notificação enviada com sucesso: ${data.id}`);
+      console.log(`[EMAIL] Notificação enviada: ${data.id}`);
     } else {
-      console.error('[EMAIL] Erro na API Resend (Notificação):', data);
+      console.error('[EMAIL] Erro API Resend (Notificação):', JSON.stringify(data));
     }
   } catch (err) {
-    console.error('[EMAIL] Erro fatal no envio da notificação:', err);
+    console.error('[EMAIL] Erro fatal notificação:', err.message);
   }
 };
 
 const sendConfirmationEmail = async (record) => {
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   
-  if (!RESEND_API_KEY) return;
+  if (!RESEND_API_KEY) {
+    console.warn('[EMAIL] Falta RESEND_API_KEY no ambiente!');
+    return;
+  }
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -191,10 +194,10 @@ const sendConfirmationEmail = async (record) => {
     if (response.ok) {
       console.log(`[EMAIL] Confirmação enviada para ${record.email}: ${data.id}`);
     } else {
-      console.error('[EMAIL] Erro na API Resend (Confirmação):', data);
+      console.error('[EMAIL] Erro API Resend (Confirmação):', JSON.stringify(data));
     }
   } catch (err) {
-    console.error('[EMAIL] Erro fatal no envio da confirmação:', err);
+    console.error('[EMAIL] Erro fatal confirmação:', err.message);
   }
 };
 
