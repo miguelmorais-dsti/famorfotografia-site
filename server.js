@@ -212,7 +212,7 @@ const handleInquiry = async (req, res) => {
     const email = normalizeText(payload.email, 180);
     const eventDate = normalizeText(payload.eventDate, 32);
 
-    if (!name || !email || !eventDate) {
+    if (!name || !email) {
       json(res, 400, { error: "Missing required fields." });
       return;
     }

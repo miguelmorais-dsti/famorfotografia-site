@@ -74,6 +74,9 @@
             <h3 data-pt="Mensagem Direta" data-en="Direct Message">Mensagem Direta</h3>
             <form class="inquiry-form" data-inquiry-form>
               <input type="hidden" name="source" value="contactos" />
+              <!-- Campo de data dummy para satisfazer o servidor atual até ser corrigido -->
+              <input type="hidden" name="eventDate" value="N/A" />
+              
               <div class="form-grid">
                 <label>
                   <span data-pt="Nome" data-en="Name">Nome</span>
@@ -93,7 +96,7 @@
                 <textarea name="message" rows="5" required></textarea>
               </label>
               <button type="submit" class="btn btn-primary" style="width: 100%;" data-pt="Enviar Mensagem" data-en="Send Message">Enviar Mensagem</button>
-              <p class="form-status" aria-live="polite"></p>
+              <p class="form-status" aria-live="polite" style="margin-top: 1rem; text-align: center; font-weight: 600;"></p>
             </form>
           </section>
         </div>
@@ -128,7 +131,12 @@
 
     <div id="lightbox" class="lightbox" aria-hidden="true">
       <button id="lightbox-close" class="lightbox-close" aria-label="Fechar">×</button>
-      <img id="lightbox-image" src="" alt="" />
+      <div class="lightbox-content">
+        <img id="lightbox-image" src="" alt="" />
+        <div id="lightbox-counter" class="lightbox-counter"></div>
+      </div>
+      <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Anterior"><span>←</span></button>
+      <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Próximo"><span>→</span></button>
     </div>
 
     <a href="https://wa.me/351917656568?text=Olá! Gostaria de saber mais informações sobre os vossos serviços de fotografia." class="whatsapp-float" target="_blank" rel="noreferrer" aria-label="Contacto via WhatsApp">
