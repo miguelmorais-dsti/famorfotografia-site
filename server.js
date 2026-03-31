@@ -118,7 +118,7 @@ const sendNotificationEmail = async (record) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Famorfotografia <onboarding@resend.dev>',
+        from: 'Famorfotografia <geral@famorfotografia.com>',
         to: ['famorfotografia@gmail.com'], // Substitui pelo teu email de destino
         subject: `Novo Pedido: ${record.name} - ${record.serviceType}`,
         html: `
@@ -165,7 +165,7 @@ const sendConfirmationEmail = async (record) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Famorfotografia <onboarding@resend.dev>',
+        from: 'Famorfotografia <geral@famorfotografia.com>',
         to: [record.email],
         reply_to: 'famorfotografia@gmail.com',
         subject: 'Recebemos a sua mensagem – Famorfotografia - The Storyteller',
