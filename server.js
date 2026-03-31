@@ -225,11 +225,18 @@ const handleInquiry = async (req, res) => {
     const record = createRecord(payload, req);
     fs.appendFileSync(INQUIRIES_FILE, `${JSON.stringify(record)}\n`);
     
-    // Enviar emails (Notificação e Confirmação)
-    Promise.all([
-      sendNotificationEmail(record),
-      sendConfirmationEmail(record)
-    ]).catch(err => console.error("Email processing error:", err));
+    // Aguardar o envio de ambos os emails antes de responder ao utilizador
+    // Essencial para ambientes serverless como a Vercel
+    try {
+      await Promise.all([
+        sendNotificationEmail(record),
+        sendConfirmationEmail(record)
+      ]);
+      console.log(`[SERVER] Pedido processado e emails enviados para ${record.id}`);
+    } catch (emailErr) {
+      console.error("[SERVER] Erro no processamento de emails:", emailErr);
+      // Continuamos para dar sucesso ao utilizador pois o registo foi gravado no ficheiro
+    }
 
     json(res, 201, { ok: true, id: record.id });
   } catch (error) {
