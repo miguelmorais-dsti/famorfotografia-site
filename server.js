@@ -119,20 +119,21 @@ const sendNotificationEmail = async (record) => {
       },
       body: JSON.stringify({
         from: 'Famorfotografia <geral@famorfotografia.com>',
-        to: ['famorfotografia@gmail.com'], // Substitui pelo teu email de destino
+        to: ['famorfotografia@gmail.com'],
+        reply_to: 'famorfotografia@gmail.com',
         subject: `Novo Pedido: ${record.name} - ${record.serviceType}`,
         html: `
           <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
-            <h2>Novo Pedido de Reserva!</h2>
+            <h2 style="color: #1a1a1a;">Novo Pedido de Reserva!</h2>
             <p><strong>Cliente:</strong> ${record.name} ${record.partnerName ? `& ${record.partnerName}` : ''}</p>
             <p><strong>Serviço:</strong> ${record.serviceType}</p>
             <p><strong>Pacote:</strong> ${record.packageType || 'Não selecionado'}</p>
             <p><strong>Data do Evento:</strong> ${record.eventDate}</p>
             <p><strong>Local:</strong> ${record.location || 'Não especificado'}</p>
             <p><strong>Email:</strong> ${record.email}</p>
-            <p><strong>Telefone:</strong> ${record.phone || 'Não facultado'}</p>
+            <p><strong>Telemóvel:</strong> ${record.phone || 'Não facultado'}</p>
             <p><strong>Orçamento:</strong> ${record.budget || 'Não indicado'}</p>
-            <hr>
+            <hr style="border: 0; border-top: 1px solid #eee;">
             <p><strong>Mensagem:</strong><br>${record.message.replace(/\n/g, '<br>')}</p>
             <br>
             <small style="color: #999;">Enviado via Famorfotografia WebServer</small>
@@ -160,6 +161,8 @@ const sendConfirmationEmail = async (record) => {
     return;
   }
 
+  console.log(`[DEBUG] A enviar confirmação para o cliente: ${record.email}`);
+
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -169,16 +172,17 @@ const sendConfirmationEmail = async (record) => {
       },
       body: JSON.stringify({
         from: 'Famorfotografia <geral@famorfotografia.com>',
-        to: [record.email, 'famorfotografia@gmail.com'], // Enviamos para ambos para garantir que vês o resultado
-        subject: 'Recebemos a sua mensagem – Famorfotografia - The Storyteller',
+        to: record.email, 
+        reply_to: 'famorfotografia@gmail.com',
+        subject: 'Recebemos o vosso contacto - Famorfotografia',
         html: `
-          <div style="font-family: sans-serif; line-height: 1.6; color: #1a1a1a;">
-            <h2>Olá ${record.name},</h2>
-            <p>Agradecemos o seu contacto através do nosso site.</p>
-            <p>A sua mensagem já está do nosso lado e será processada com a maior brevidade.</p>
-            <p>Se entretanto surgir alguma dúvida urgente, contacte o <strong>917656568</strong>.</p>
+          <div style="font-family: sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px;">
+            <h2 style="font-weight: normal;">Olá ${record.name},</h2>
+            <p>Agradecemos o vosso contacto através do nosso site.</p>
+            <p>A vossa mensagem já foi recebida e será respondida com a maior brevidade possível (normalmente em menos de 24 horas).</p>
+            <p>Se, entretanto, surgir alguma dúvida urgente, não hesitem em contactar através do número <strong>917656568</strong>.</p>
             <br>
-            <p>Com os melhores cumprimentos,<br><strong>Miguel Morais</strong><br>Famorfotografia</p>
+            <p>Com os melhores cumprimentos,<br><br><strong>Miguel Morais</strong><br>Famorfotografia — The Storyteller</p>
           </div>
         `
       }),
@@ -186,12 +190,12 @@ const sendConfirmationEmail = async (record) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(`[EMAIL] Confirmação enviada para ${record.email}: ${data.id}`);
+      console.log(`[EMAIL] Confirmação aceite pelo Resend para ${record.email}: ${data.id}`);
     } else {
-      console.error('[EMAIL] Erro API Resend (Confirmação):', JSON.stringify(data));
+      console.error('[EMAIL] Erro API Resend (Confirmação):', data);
     }
   } catch (err) {
-    console.error('[EMAIL] Erro fatal confirmação:', err.message);
+    console.error('[EMAIL] Erro fatal na função de confirmação:', err.message);
   }
 };
 
@@ -222,20 +226,24 @@ const handleInquiry = async (req, res) => {
     const record = createRecord(payload, req);
     fs.appendFileSync(INQUIRIES_FILE, `${JSON.stringify(record)}\n`);
     
-    // Processamento sequencial para garantir que nada é interrompido
-    try {
-      console.log(`[SERVER] Iniciando envio para: ${record.email}`);
-      
-      // 1. Tentar enviar primeiro a confirmação ao cliente
-      await sendConfirmationEmail(record);
-      
-      // 2. Depois enviar a notificação para ti
-      await sendNotificationEmail(record);
-      
-      console.log(`[SERVER] Fluxo de emails concluído para ${record.id}`);
-    } catch (emailErr) {
-      console.error("[SERVER] Erro crítico no fluxo de emails:", emailErr.message);
-    }
+    // Processamento independente para garantir que um erro num email não bloqueia o outro
+    console.log(`[SERVER] Iniciando fluxo de emails para: ${record.email}`);
+    
+    // 1. Tentar enviar a confirmação ao cliente
+    const confirmationPromise = sendConfirmationEmail(record).catch(err => 
+      console.error("[SERVER] Erro no email de confirmação:", err.message)
+    );
+    
+    // 2. Tentar enviar a notificação para o fotógrafo
+    const notificationPromise = sendNotificationEmail(record).catch(err => 
+      console.error("[SERVER] Erro no email de notificação:", err.message)
+    );
+
+    // Aguardamos ambos mas sem bloquear a resposta ao utilizador se possível
+    // (Embora aqui o await seja seguro porque já têm catch individual)
+    await Promise.all([confirmationPromise, notificationPromise]);
+    
+    console.log(`[SERVER] Fluxo de emails finalizado para ${record.id}`);
 
     json(res, 201, { ok: true, id: record.id });
   } catch (error) {
