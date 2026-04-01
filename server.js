@@ -161,7 +161,13 @@ const sendConfirmationEmail = async (record) => {
     return;
   }
 
-  console.log(`[DEBUG] A enviar confirmação para o cliente: ${record.email}`);
+  const clientEmail = String(record.email || '').trim();
+  console.log(`[DEBUG] A enviar confirmação para o cliente: "${clientEmail}"`);
+
+  if (!clientEmail || !clientEmail.includes('@')) {
+    console.error(`[EMAIL] Email do cliente inválido: "${clientEmail}"`);
+    return;
+  }
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -172,7 +178,7 @@ const sendConfirmationEmail = async (record) => {
       },
       body: JSON.stringify({
         from: 'Famorfotografia <geral@famorfotografia.com>',
-        to: record.email, 
+        to: [clientEmail], 
         reply_to: 'famorfotografia@gmail.com',
         subject: 'Recebemos o vosso contacto - Famorfotografia',
         html: `
@@ -190,9 +196,9 @@ const sendConfirmationEmail = async (record) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(`[EMAIL] Confirmação aceite pelo Resend para ${record.email}: ${data.id}`);
+      console.log(`[EMAIL] Confirmação aceite pelo Resend para ${clientEmail}: ${data.id}`);
     } else {
-      console.error('[EMAIL] Erro API Resend (Confirmação):', data);
+      console.error('[EMAIL] Erro API Resend (Confirmação):', JSON.stringify(data));
     }
   } catch (err) {
     console.error('[EMAIL] Erro fatal na função de confirmação:', err.message);
