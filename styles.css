@@ -201,7 +201,7 @@ main { padding-top: 100px; }
 
 /* ── SOBRE (EDITORIAL) ────────────────────── */
 
-.editorial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+.editorial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
 .editorial-image { position: relative; box-shadow: var(--shadow-lg); }
 .editorial-image img { width: 100%; height: auto; display: block; }
 
