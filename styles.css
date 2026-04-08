@@ -202,8 +202,8 @@ main { padding-top: 100px; }
 /* ── SOBRE (EDITORIAL) ────────────────────── */
 
 .editorial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
-.editorial-image { position: relative; aspect-ratio: 3/4; overflow: hidden; box-shadow: var(--shadow-lg); }
-.editorial-image img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-image { position: relative; box-shadow: var(--shadow-lg); }
+.editorial-image img { width: 100%; height: auto; display: block; }
 
 .editorial-copy h2 { 
   font-weight: 700; margin-top: 0; font-size: 1.8rem; white-space: nowrap; 
