@@ -331,16 +331,89 @@ window.FAMOR_ALBUMS = [
 ];
 
 window.FAMOR_COMUNHOES = [
-  /* 
-  Para adicionar um álbum, copie este exemplo e preencha os dados:
   {
-    id: 'nome-do-album',
-    title: 'Nome da Criança',
-    cover: 'assets/photos/comunhoes/capa.webp',
+    id: 'comunhao-beatriz',
+    title: 'Comunhão Beatriz',
+    cover: 'assets/photos/comunhao-beatriz/DSC_5637.webp',
     photos: [
-      'assets/photos/comunhoes/foto1.webp',
-      'assets/photos/comunhoes/foto2.webp'
+      'assets/photos/comunhao-beatriz/DSC_5637.webp',
+      'assets/photos/comunhao-beatriz/DSC_5678.webp',
+      'assets/photos/comunhao-beatriz/DSC_5773.webp',
+      'assets/photos/comunhao-beatriz/DSC_5805.webp',
+      'assets/photos/comunhao-beatriz/DSC_5901.webp',
+      'assets/photos/comunhao-beatriz/DSC_5659.webp',
+      'assets/photos/comunhao-beatriz/DSC_5728.webp',
+      'assets/photos/comunhao-beatriz/DSC_5785.webp',
+      'assets/photos/comunhao-beatriz/DSC_5824.webp',
+      'assets/photos/comunhao-beatriz/DSC_5939.webp'
     ]
   },
-  */
+  {
+    id: 'comunhao-diego',
+    title: 'Comunhão Diego',
+    cover: 'assets/photos/comunhao-diego/Sessão (101).webp',
+    photos: [
+      'assets/photos/comunhao-diego/Sessão (101).webp',
+      'assets/photos/comunhao-diego/Sessão (136).webp',
+      'assets/photos/comunhao-diego/Sessão (27).webp',
+      'assets/photos/comunhao-diego/Sessão (77).webp',
+      'assets/photos/comunhao-diego/Sessão (103).webp',
+      'assets/photos/comunhao-diego/Sessão (144).webp',
+      'assets/photos/comunhao-diego/Sessão (35).webp',
+      'assets/photos/comunhao-diego/Sessão (9).webp',
+      'assets/photos/comunhao-diego/Sessão (121).webp',
+      'assets/photos/comunhao-diego/Sessão (147).webp',
+      'assets/photos/comunhao-diego/Sessão (56).webp',
+      'assets/photos/comunhao-diego/Sessão (95).webp',
+      'assets/photos/comunhao-diego/Sessão (127).webp',
+      'assets/photos/comunhao-diego/Sessão (158).webp',
+      'assets/photos/comunhao-diego/Sessão (73).webp'
+    ]
+  },
+  {
+    id: 'comunhao-ines',
+    title: 'Comunhão Inês',
+    cover: 'assets/photos/comunhao-ines/DSC_3438.webp',
+    photos: [
+      'assets/photos/comunhao-ines/DSC_3438.webp',
+      'assets/photos/comunhao-ines/DSC_3532.webp',
+      'assets/photos/comunhao-ines/DSC_3551.webp',
+      'assets/photos/comunhao-ines/DSC_3561.webp',
+      'assets/photos/comunhao-ines/DSC_3572.webp',
+      'assets/photos/comunhao-ines/DSC_3614.webp',
+      'assets/photos/comunhao-ines/DSC_3635.webp',
+      'assets/photos/comunhao-ines/DSC_3512.webp',
+      'assets/photos/comunhao-ines/DSC_3539.webp',
+      'assets/photos/comunhao-ines/DSC_3552.webp',
+      'assets/photos/comunhao-ines/DSC_3565.webp',
+      'assets/photos/comunhao-ines/DSC_3589.webp',
+      'assets/photos/comunhao-ines/DSC_3620.webp',
+      'assets/photos/comunhao-ines/DSC_3521.webp',
+      'assets/photos/comunhao-ines/DSC_3542.webp',
+      'assets/photos/comunhao-ines/DSC_3558.webp',
+      'assets/photos/comunhao-ines/DSC_3569.webp',
+      'assets/photos/comunhao-ines/DSC_3605.webp',
+      'assets/photos/comunhao-ines/DSC_3633.webp'
+    ]
+  },
+  {
+    id: 'comunhao-leonor',
+    title: 'Comunhão Leonor',
+    cover: 'assets/photos/comunhao-leonor/DSC_6525.webp',
+    photos: [
+      'assets/photos/comunhao-leonor/DSC_6525.webp',
+      'assets/photos/comunhao-leonor/DSC_7256.webp',
+      'assets/photos/comunhao-leonor/DSC_7278.webp',
+      'assets/photos/comunhao-leonor/DSC_7290.webp',
+      'assets/photos/comunhao-leonor/Z6I_1836.webp',
+      'assets/photos/comunhao-leonor/Z6I_1857.webp',
+      'assets/photos/comunhao-leonor/Z6I_1897.webp',
+      'assets/photos/comunhao-leonor/DSC_7210.webp',
+      'assets/photos/comunhao-leonor/DSC_7272.webp',
+      'assets/photos/comunhao-leonor/DSC_7287.webp',
+      'assets/photos/comunhao-leonor/Z6I_1831.webp',
+      'assets/photos/comunhao-leonor/Z6I_1847.webp',
+      'assets/photos/comunhao-leonor/Z6I_1890.webp'
+    ]
+  }
 ];
