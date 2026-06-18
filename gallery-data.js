@@ -329,3 +329,18 @@ window.FAMOR_ALBUMS = [
     ]
   }
 ];
+
+window.FAMOR_COMUNHOES = [
+  /* 
+  Para adicionar um álbum, copie este exemplo e preencha os dados:
+  {
+    id: 'nome-do-album',
+    title: 'Nome da Criança',
+    cover: 'assets/photos/comunhoes/capa.webp',
+    photos: [
+      'assets/photos/comunhoes/foto1.webp',
+      'assets/photos/comunhoes/foto2.webp'
+    ]
+  },
+  */
+];

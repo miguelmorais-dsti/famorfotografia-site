@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comunhões/Batizados - Famorfotografia</title>
+    <meta name="description" content="Explore a nossa galeria de fotografia de comunhões e batizados. Eternizamos momentos especiais da infância e família." />
+    <link rel="canonical" href="https://famorfotografia.com/comunhoes.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://famorfotografia.com/comunhoes.html" />
+    <meta property="og:title" content="Comunhões/Batizados - Famorfotografia" />
+    <meta property="og:description" content="Explore a nossa galeria de fotografia de comunhões e batizados. Eternizamos momentos especiais da infância e família." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=9.0" />
+  </head>
+  <body class="internal-page">
+    <div class="noise"></div>
+
+    <button id="floating-back" class="floating-back-btn" aria-label="Voltar para álbuns" onclick="renderAlbums()">
+      <span style="font-size: 1.5rem; line-height: 1; color: inherit;">←</span>
+    </button>
+
+    <nav class="nav">
+      <a class="brand" href="./index.html">Famorfotografia - The Storyteller</a>
+      <div class="nav-links">
+        <a href="./sobre.html" data-pt="Sobre" data-en="About">Sobre</a>
+        <a href="./galeria.html" data-pt="Galeria" data-en="Gallery">Galeria</a>
+        <a href="./comunhoes.html" class="active" data-pt="Comunhões/Batizados" data-en="Communions/Baptisms">Comunhões/Batizados</a>
+        <a href="./videos.html" data-pt="Vídeos" data-en="Videos">Vídeos</a>
+        <a href="./pacotes.html" data-pt="Pacotes" data-en="Packs">Pacotes</a>
+        <a href="./testemunhos.html" data-pt="Testemunhos" data-en="Testimonials">Testemunhos</a>
+        <a href="./contactos.html" data-pt="Contactos" data-en="Contact">Contactos</a>
+        <a href="https://www.instagram.com/famorfotografia/" target="_blank" rel="noreferrer" style="color: var(--accent); font-weight: 700;">Instagram</a>
+        <div class="lang-selector">
+          <button onclick="setLanguage('pt')" id="btn-pt" class="active">PT</button>
+          <span>|</span>
+          <button onclick="setLanguage('en')" id="btn-en">EN</button>
+        </div>
+        <a class="nav-cta" href="./reserva.html" data-pt="Reservar" data-en="Book Now">Reservar</a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <main style="padding-top: 120px;">
+      <section id="galeria" class="section container">
+        <div class="section-head">
+          <p class="eyebrow" data-pt="Comunhões/Batizados" data-en="Communions/Baptisms">Comunhões/Batizados</p>
+          <h2 data-pt="Momentos únicos, memórias para a vida." data-en="Unique moments, memories for life.">Momentos únicos, memórias para a vida.</h2>
+        </div>
+        
+        <div id="gallery-grid" class="gallery-grid albums-list" aria-live="polite">
+          <!-- O conteúdo será carregado via gallery-data.js ou poderá adicionar álbuns específicos aqui -->
+          <div style="grid-column: 1/-1; text-align: center; padding: 4rem 0; opacity: 0.6;">
+            <p data-pt="Novas histórias a chegar brevemente..." data-en="New stories coming soon...">Novas histórias a chegar brevemente...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a class="brand" href="./index.html">Famorfotografia - The Storyteller</a>
+        <nav class="footer-links">
+          <a href="./sobre.html">Sobre</a>
+          <a href="./galeria.html">Galeria</a>
+          <a href="./comunhoes.html">Comunhões/Batizados</a>
+          <a href="./videos.html">Vídeos</a>
+          <a href="./pacotes.html">Pacotes</a>
+          <a href="./testemunhos.html">Testemunhos</a>
+          <a href="./reserva.html">Reservar</a>
+        </nav>
+        <p class="footer-copy">© 2026 Famorfotografia</p>
+      </div>
+    </footer>
+
+    <script src="./gallery-data.js"></script>
+    <script>
+      // Carregar apenas os álbuns de Comunhões/Batizados
+      window.FAMOR_ALBUMS = window.FAMOR_COMUNHOES || [];
+      window.FAMOR_HIGHLIGHTS = []; // Deixar highlights vazio nesta aba ou adicionar fotos soltas se desejar
+    </script>
+    <script src="./main.js"></script>
+  </body>
+</html>
